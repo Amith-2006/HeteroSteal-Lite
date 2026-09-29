@@ -1,0 +1,44 @@
+hs_ws_bench
+  mode               mixed
+  workers            4
+  tasks              1000
+  mix                0.5
+  compute_iters      10000
+  callback_iters     50
+  seed               1
+  steal_attempts     4
+  wall_s             0.001514
+  throughput_tasks_s 660341.48
+  checksum           3916916558000
+
+all:
+  count              1000
+  throughput_tasks_s 660341.48
+  latency_p50_ns     678205
+  latency_p90_ns     1137536
+  latency_p99_ns     1313911
+  stolen_tasks       26
+  steal_count_sum    26
+
+compute:
+  count              500
+  throughput_tasks_s 330170.74
+  latency_p50_ns     687122
+  latency_p90_ns     1165995
+  latency_p99_ns     1313744
+  stolen_tasks       11
+  steal_count_sum    11
+
+callback:
+  count              500
+  throughput_tasks_s 330170.74
+  latency_p50_ns     667913
+  latency_p90_ns     1090870
+  latency_p99_ns     1313911
+  stolen_tasks       15
+  steal_count_sum    15
+
+latency: enqueue→complete on each TaskDescriptor; percentiles are
+nearest-rank on the sorted sample (index = ceil(p/100*n)-1).
+seed fixes class shuffle (mixed) and victim-draw sequence only;
+it does not freeze steal success, steal counts, or timings.

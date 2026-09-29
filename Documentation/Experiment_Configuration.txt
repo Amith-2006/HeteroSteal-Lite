@@ -1,0 +1,68 @@
+HETEROSTEAL LITE
+EXPERIMENT CONFIGURATION AND ENVIRONMENT
+
+1. PROJECT
+Project: HeteroSteal Lite
+Experiment type: Synthetic closed-batch work-stealing benchmark
+Purpose: Examine how mixing short callback-like tasks with compute-intensive tasks affects throughput and task completion latency.
+
+2. ENVIRONMENT
+Operating System: Ubuntu 26.04.1 LTS
+Architecture: ARM64 (aarch64)
+Virtualization: UTM on Apple Silicon Mac
+Virtual CPUs: 4
+RAM: Approximately 3.3 GiB
+Compiler: GCC 15.2.0
+Build System: CMake 4.2.3
+Build Type: Release
+
+3. BENCHMARK CONFIGURATION
+Task count per run: 1000
+Worker counts: 1, 2, 4
+Workload modes:
+  - Compute
+  - Callback
+  - Mixed
+
+Repetitions per configuration: 5
+Total configurations: 9
+Total benchmark runs: 45
+
+Default workload parameters:
+  Compute iterations: 10000
+  Callback iterations: 50
+  Mixed callback fraction: 0.5
+  Random seed: 1
+  Steal attempts: 4
+
+4. MEASUREMENTS
+Throughput: Completed tasks per second
+Latency: Enqueue-to-completion latency
+Reported latency percentiles: p50, p90, p99
+Variability: Sample standard deviation across five repetitions
+Graph error bars: Plus/minus one sample standard deviation
+
+5. VALIDATION
+All 45 runs completed with 1000 tasks per run.
+All nine configurations had consistent checksums across five repetitions.
+
+6. LIMITATIONS
+This is a synthetic benchmark using callback-like tasks.
+It does not evaluate actual io_uring callbacks.
+The experiment uses a four-vCPU ARM64 virtual machine.
+Each configuration has five repetitions.
+Results are preliminary and may be affected by virtualization,
+scheduler overhead, and measurement noise.
+Latency represents enqueue-to-completion time, not pure execution time.
+
+7. RESULTS LOCATION
+Corrected CSV, raw logs, and variability summary:
+experiment_results/
+
+Individual and combined graphs:
+Graphs/
+
+C++ source and Python scripts:
+Source_Code/
+
+END OF RECORD
